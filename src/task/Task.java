@@ -4,20 +4,34 @@ import ingredient.Ingredient;
 
 public abstract class Task {
 	
-	protected String[] ingrNames;
+	protected Ingredient[] ingrs;
+	protected int numberOfIngredientsToGet;
 	
-	public Task(String[] ingrNames) {
-		this.ingrNames = ingrNames;
+	public Task(int numberOfIngredientsToGet) {
+		this.numberOfIngredientsToGet = numberOfIngredientsToGet;
 	}
 	
-	public Task(String ingrName) {
-		this(new String[] {ingrName});
+	public Task(Ingredient[] ingrs) {
+		setIngredients(ingrs);
+		this.numberOfIngredientsToGet = 0;
 	}
 	
-	public String[] getIngredientNames() {
-		return ingrNames;
+	public Task(Ingredient ingrName) {
+		this(new Ingredient[] {ingrName});
 	}
 	
-	public abstract String describe(Ingredient[] ingrs);
+	public int getLastIngredients() {
+		return numberOfIngredientsToGet;
+	}
+	
+	public Ingredient[] getIngredients() {
+		return ingrs;
+	}
+	
+	public void setIngredients(Ingredient[] ingrs) {
+		this.ingrs = ingrs;
+	}
+	
+	public abstract String describe();
 	public abstract Ingredient result();
 }

@@ -10,11 +10,29 @@ public class Ingredient {
 		this.quantity = quantity;
 	}
 	
+	public Ingredient(Ingredient ingr) {
+		this(ingr.getName(), ingr.getQuantity());
+	}
+	
 	public String getName() {
 		return name;
 	}
 	
+	public float getQuantity() {
+		return quantity;
+	}
+	
 	public String describe() {
 		return quantity + " " + name;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Ingredient)) {
+			return false;
+		}
+		
+		Ingredient o = (Ingredient) obj;
+		return name.equals(o.getName());
 	}
 }

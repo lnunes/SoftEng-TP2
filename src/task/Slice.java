@@ -1,23 +1,26 @@
 package task;
 
 import ingredient.Ingredient;
+import ingredient.SlicedIngredient;
 
 public class Slice extends Task {
 	
-	public Slice(String ingrName) {
-		super(ingrName);
+	public Slice(int numberOfIngredientsToGet) {
+		super(numberOfIngredientsToGet);
+	}
+	
+	public Slice(Ingredient ingr) {
+		super(ingr);
 	}
 	
 	@Override
-	public String describe(Ingredient[] ingrs) {
-		
-		return null;
+	public String describe() {
+		return "Fatiar " + ingrs[0].getName();
 	}
 
 	@Override
 	public Ingredient result() {
-		
-		return null;
+		return new SlicedIngredient(ingrs[0]);
 	}
 
 }

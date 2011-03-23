@@ -1,23 +1,26 @@
 package task;
 
+import ingredient.ChoppedIngredient;
 import ingredient.Ingredient;
 
 public class Chop extends Task {
-
-	public Chop(String ingrName) {
-		super(ingrName);
+	
+	public Chop(int numberOfIngredientsToGet) {
+		super(numberOfIngredientsToGet);
+	}
+	
+	public Chop(Ingredient ingr) {
+		super(ingr);
 	}
 	
 	@Override
-	public String describe(Ingredient[] ingrs) {
-		// TODO Auto-generated method stub
-		return null;
+	public String describe() {
+		return "Picar " + ingrs[0].getName();
 	}
 
 	@Override
 	public Ingredient result() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ChoppedIngredient(ingrs[0]);
 	}
 
 }

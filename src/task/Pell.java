@@ -1,23 +1,26 @@
 package task;
 
 import ingredient.Ingredient;
+import ingredient.PelledIngredient;
 
 public class Pell extends Task {
 
-	public Pell(String ingrName) {
-		super(ingrName);
+	public Pell(int numberOfIngredientsToGet) {
+		super(numberOfIngredientsToGet);
+	}
+	
+	public Pell(Ingredient ingr) {
+		super(ingr);
 	}
 	
 	@Override
-	public String describe(Ingredient[] ingrs) {
-		// TODO Auto-generated method stub
-		return null;
+	public String describe() {
+		return "Descascar " + ingrs[0].getName();
 	}
 
 	@Override
 	public Ingredient result() {
-		// TODO Auto-generated method stub
-		return null;
+		return new PelledIngredient(ingrs[0]);
 	}
 
 }
