@@ -5,10 +5,6 @@ import ingredient.Ingredient;
 
 public class Chop extends Task {
 	
-	public Chop(int numberOfIngredientsToGet) {
-		super(numberOfIngredientsToGet);
-	}
-	
 	public Chop(Ingredient ingr) {
 		super(ingr);
 	}

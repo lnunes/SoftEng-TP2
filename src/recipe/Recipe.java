@@ -1,62 +1,66 @@
 package recipe;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import ingredient.Ingredient;
+
+import java.util.ArrayList;
 
 import task.Task;
-import ingredient.Ingredient;
 
 public class Recipe {
 	
 	protected String name;
-	protected Ingredient[] ingrList;
-	
+	protected ArrayList<Ingredient> ingrList = new ArrayList<Ingredient>();
 	protected Task[] taskList;
 	
 	public Recipe(String name, Ingredient[] ingrList, Task[] taskList) {
 		this.name = name;
-		this.ingrList = ingrList;
+		for (Ingredient ingr : ingrList) {
+			this.ingrList.add(ingr);
+		}
 		this.taskList = taskList;
 	}
 	
-	protected Queue<Ingredient> resultQueue;
-	
-	public String describe() {
+	public String describe() throws RecipeException{
 		String ret = name + ":\r\n";
 		
-		if (ingrList.length > 0) {
+		if (!ingrList.isEmpty()) {
 			ret += "Ingredientes:\r\n";
 			for (Ingredient ingredient : ingrList) {
 				ret += "\t" + ingredient.describe() + "\r\n";
 			}
 		}
 		
-		resultQueue = new LinkedList<Ingredient>();
+		ret += "\r\n";
+		
 		if (taskList.length > 0) {
 			ret += "Modo de preparo:\r\n";
 			for (Task task : taskList) {
-				int numberOfLastIngr = task.getLastIngredients();
-				Ingredient result = null;
-				if (numberOfLastIngr == 0) { // Get the ingredients from the ingredients list
-					result = task.result();
-				} else { // Get a derived ingredient
-					Ingredient[] ingrs = new Ingredient[numberOfLastIngr];
-					for (int i = 0; i < ingrs.length; i++) {
-						ingrs[i] = resultQueue.poll();
+				Ingredient[] neededIngr = task.getIngredients();
+				for (Ingredient ingredient : neededIngr) {
+					if (!ingrList.contains(ingredient)) {
+						throw new RecipeException("Faltou ingrediente " + ingredient.getName() + " na receita " + name);
 					}
-					task.setIngredients(ingrs);
-					result = task.result();
+					
+					ingrList.remove(ingredient);
 				}
 				
 				ret += "\t" + task.describe() + "\r\n";
-				resultQueue.add(result);
+				ingrList.add(task.result());
 			}
+			
 		}
 		
-		//At this point, resultQueue should be only one result, the final one
+		ret += "\r\n";
 		
-		ret += "Resultado:\r\n\t" + resultQueue.poll().describe();
+		ret += "Resultado:\r\n\t" + ingrList.get(0).getName();
 		
 		return ret;
+	}
+	
+	@SuppressWarnings("serial")
+	public static class RecipeException extends Exception {
+		public RecipeException(String message) {
+			super(message);
+		}
 	}
 }

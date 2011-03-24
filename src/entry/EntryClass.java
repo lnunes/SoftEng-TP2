@@ -1,11 +1,13 @@
 package entry;
 
+import ingredient.ChoppedIngredient;
 import ingredient.Ingredient;
+import ingredient.PelledIngredient;
 import recipe.Recipe;
+import recipe.Recipe.RecipeException;
 import task.Chop;
 import task.Mix;
 import task.Pell;
-import task.Slice;
 import task.Task;
 
 public class EntryClass {
@@ -30,18 +32,42 @@ public class EntryClass {
 			azeite
 		};
 		
+		Ingredient[] mixIngr = new Ingredient[] {
+				new ChoppedIngredient(new PelledIngredient(cebola)),
+				new ChoppedIngredient(pimentao),
+				new ChoppedIngredient(tomate)
+		};
+		Mix mix1 = new Mix(mixIngr);
+		
+		mixIngr = new Ingredient[] {
+				vinagre,
+				mix1.result()
+		};
+		Mix mix2 = new Mix(mixIngr);
+		
+		mixIngr = new Ingredient[] {
+				azeite,
+				mix2.result()
+		};
+		Mix mix3 = new Mix(mixIngr);
+		
 		Task[] taskList = new Task[] {
-			new Slice(tomate),
+			new Chop(tomate),
 			new Pell(cebola),
-			new Chop(1),
+			new Chop(new PelledIngredient(cebola)),
 			new Chop(pimentao),
-			new Mix(3),
-			new Mix(2),
-			new Mix(2)
+			mix1,
+			mix2,
+			mix3
 		};
 		
 		Recipe rcp1 = new Recipe("Molho à Campanha (Vinagrete)", ingrList, taskList);
-		print(rcp1.describe());
+		try {
+			print(rcp1.describe());
+		} catch (RecipeException e) {
+			print(e.getMessage());
+			System.exit(0);
+		}
 	}
 	
 	public static void print(String s) {

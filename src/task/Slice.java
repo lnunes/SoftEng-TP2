@@ -5,10 +5,6 @@ import ingredient.SlicedIngredient;
 
 public class Slice extends Task {
 	
-	public Slice(int numberOfIngredientsToGet) {
-		super(numberOfIngredientsToGet);
-	}
-	
 	public Slice(Ingredient ingr) {
 		super(ingr);
 	}

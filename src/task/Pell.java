@@ -5,10 +5,6 @@ import ingredient.PelledIngredient;
 
 public class Pell extends Task {
 
-	public Pell(int numberOfIngredientsToGet) {
-		super(numberOfIngredientsToGet);
-	}
-	
 	public Pell(Ingredient ingr) {
 		super(ingr);
 	}

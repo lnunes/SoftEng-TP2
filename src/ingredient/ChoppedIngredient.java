@@ -1,7 +1,7 @@
 package ingredient;
 
-public class ChoppedIngredient extends Ingredient {
+public class ChoppedIngredient extends DerivedIngredient {
 	public ChoppedIngredient(Ingredient ingr) {
-		super(ingr.getName() + " Picado", ingr.getQuantity());
+		super("Picado", ingr);
 	}
 }

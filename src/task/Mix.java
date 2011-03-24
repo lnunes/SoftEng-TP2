@@ -5,10 +5,6 @@ import ingredient.MixedIngredients;
 
 public class Mix extends Task {
 	
-	public Mix(int numberOfIngredientsToGet) {
-		super(numberOfIngredientsToGet);
-	}
-	
 	public Mix(Ingredient[] ingrs) {
 		super(ingrs);
 	}

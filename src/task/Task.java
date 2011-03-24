@@ -5,31 +5,17 @@ import ingredient.Ingredient;
 public abstract class Task {
 	
 	protected Ingredient[] ingrs;
-	protected int numberOfIngredientsToGet;
-	
-	public Task(int numberOfIngredientsToGet) {
-		this.numberOfIngredientsToGet = numberOfIngredientsToGet;
-	}
 	
 	public Task(Ingredient[] ingrs) {
-		setIngredients(ingrs);
-		this.numberOfIngredientsToGet = 0;
+		this.ingrs = ingrs;
 	}
 	
-	public Task(Ingredient ingrName) {
-		this(new Ingredient[] {ingrName});
-	}
-	
-	public int getLastIngredients() {
-		return numberOfIngredientsToGet;
+	public Task(Ingredient ingr) {
+		this(new Ingredient[] {ingr});
 	}
 	
 	public Ingredient[] getIngredients() {
 		return ingrs;
-	}
-	
-	public void setIngredients(Ingredient[] ingrs) {
-		this.ingrs = ingrs;
 	}
 	
 	public abstract String describe();

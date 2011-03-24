@@ -23,16 +23,15 @@ public class Ingredient {
 	}
 	
 	public String describe() {
-		return quantity + " " + name;
+		return getQuantity() + " " + getName();
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof Ingredient)) {
-			return false;
+		if (obj instanceof Ingredient) {
+			return getName().equals(((Ingredient) obj).getName());
 		}
 		
-		Ingredient o = (Ingredient) obj;
-		return name.equals(o.getName());
+		return false;
 	}
 }
