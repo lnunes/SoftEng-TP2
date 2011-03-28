@@ -20,6 +20,10 @@ public class Recipe {
 		this.taskList = taskList;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public String describe() throws RecipeException{
 		String ret = name + ":\r\n";
 		
@@ -38,7 +42,7 @@ public class Recipe {
 				Ingredient[] neededIngr = task.getIngredients();
 				for (Ingredient ingredient : neededIngr) {
 					if (!ingrList.contains(ingredient)) {
-						throw new RecipeException("Faltou ingrediente " + ingredient.getName() + " na receita " + name);
+						throw new RecipeException(this, ingredient);
 					}
 					
 					ingrList.remove(ingredient);
@@ -55,12 +59,5 @@ public class Recipe {
 		ret += "Resultado:\r\n\t" + ingrList.get(0).getName();
 		
 		return ret;
-	}
-	
-	@SuppressWarnings("serial")
-	public static class RecipeException extends Exception {
-		public RecipeException(String message) {
-			super(message);
-		}
 	}
 }
